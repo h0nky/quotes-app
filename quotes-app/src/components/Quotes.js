@@ -3,11 +3,19 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import quotesActions from './../actions/quotes';
 
-const Quote = (props) => (
-    <li className="quote">
-        {props.children}
-    </li>
-)
+const Quote = ({ quote, deleteQuote }) => {
+    return (
+        <div className="quote-container">
+            <div className="delete-container" onClick={() => quotesActions.deleteQuote(quote.ID)}>
+                <div className="quote">
+                    <a className="delete-button">Delete quote</a>
+                    <p className="quote-author">{quote.title}</p>
+                    <p className="quote-text">{quote.content}</p>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 class Quotes extends PureComponent {
     onHandleClick = () => {
@@ -23,15 +31,9 @@ class Quotes extends PureComponent {
                 <div className="button-container">
                     <button className="button" onClick={this.onHandleClick}>DRAG QUOTES</button>
                 </div>
-                { quotesList ? quotesList.map(i => 
-                    <Quote>
-                        <p className="quote-author">{i.title}</p>
-                        <p className="quote-text">{i.content}</p>
-                        <p className="quote-link">{i.link}</p>
-                    </Quote>
-                    ) : null }
+                { quotesList ? quotesList.map(quote => <Quote key={quote.ID} deleteQuote={quotesActions.deleteQuote} quote={quote}/>) : null }
             </div>
-        );
+        )
     };
 };
 

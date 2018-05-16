@@ -13,6 +13,11 @@ export default (state = initial, action) => {
             }
             return { ...payload }
         }
+        case actionTypes.DELETE_QUOTE: {
+            let copy = Object.values(state);
+            let newState = copy.filter(i => i.ID !== payload)
+            return newState;
+        }
         default:
             return state;
     }

@@ -38,7 +38,7 @@
 
 .Content {
   flex: 1;
-  padding: 40px;
+  padding: 40px 80px;
 }
 
 h1 {
@@ -46,17 +46,20 @@ h1 {
 }
 
 .quote {
-  padding: 15px 0;
+  padding: 50px 10px;
   list-style: none;
+  border-bottom: 1px solid black;
 }
 
 .quote-author {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: bold;
+  padding: 25px;
 }
 
 .quote-text {
-  font-size: 20px;
+  font-size: 24px;
+  font-style: italic;
 }
 
 .button-container {
@@ -73,4 +76,14 @@ h1 {
   height: 100%;
   color: white;
   font-size: 16px;
+  cursor: pointer;
+}
+
+.delete-button {
+  border: 1px solid tomato;
+  cursor: pointer;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: tomato;
+  color: white;
 }
