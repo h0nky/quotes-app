@@ -1,0 +1,19 @@
+- clone boilerplate create-react-app
+- update yarn to the latest version
+- create project with npx-create-app
+- install react-router-dom
+- make basic markup of all needful pages
+- add a BrowserRouter, create <Router /> component, add all necessary routes such as Home, Profile, Quotes
+- install axios
+- fix problem with CORS (Allow-Control-Allow-Origin: *) by installing corresponding chrome plugin.
+(Without this plugin it's impossible to make an http-request to our database with quotes because of strict permissions !)
+- make an http-request with axios to fetch necessary data, test that everything is fine and my data is here :)
+- install redux, react-redux and redux-logger libraries
+- set up a store, create two reducers - quotes.js and index.js, create constants with action types and also add actions with bindActionCreators.
+- add a <Provider /> component and pass a store to it
+- connect my <Quotes /> component to the redux
+- get my data and put it to the redux store
+- get my list of quotes with mapStateToProps from the state and display it 
+- make some additional markup
+- write addtional functionality which allows us to delete our quotes one by one
+- make some additional markup
