@@ -1,8 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import Home from './Home';
-import Profile from './Profile';
-import Quotes from './Quotes';
 
 const Header = () => (
   <header className="App-header">

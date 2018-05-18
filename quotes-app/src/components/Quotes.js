@@ -3,19 +3,53 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import quotesActions from './../actions/quotes';
 
-const Quote = ({ quote, deleteQuote }) => {
-    return (
-        <div className="quote-container">
-            <div className="delete-container" onClick={() => quotesActions.deleteQuote(quote.ID)}>
+class Quote extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            editable: false,
+            newQuote: ''
+        }
+    }
+    onHandleClick = () => {
+        const quote = this.state.newQuote;
+        const quoteId = this.props.quote.ID;
+        this.setState({ editable: !this.state.editable })
+        quotesActions.editQuote(quote, quoteId);
+    }
+    onHandleChange = (e) => {
+        this.setState({ newQuote: e.target.value });
+    }
+    isEditable = () => {
+        this.setState({ editable: !this.state.editable })
+    }
+    render() {
+        const { title, content, ID } = this.props.quote;
+        return (
+            <div className="quote-container">
+                <div className="delete-container">
+                { this.state.editable ?
                 <div className="quote">
-                    <a className="delete-button">Delete quote</a>
-                    <p className="quote-author">{quote.title}</p>
-                    <p className="quote-text">{quote.content}</p>
+                    <p className="quote-author">{ title }</p>
+                    <textarea className="quote-editable-cell" onChange={this.onHandleChange}>{ content }</textarea>
+                    <div className="button-container small">
+                        <button className="button" onClick={this.onHandleClick}> SAVE </button>
+                    </div>
+                </div> :
+                <div className="quote">
+                    <div className="button-container">
+                        <button className="button" onClick={() => quotesActions.deleteQuote(ID)}> DELETE </button>
+                        <button className="button" onClick={this.isEditable}> EDIT </button>
+                    </div>
+                    <p className="quote-author">{ title }</p>
+                    <p className="quote-text">{ content }</p>
+                </div>
+                }
                 </div>
             </div>
-        </div>
-    )
-}
+        );
+    };
+};
 
 class Quotes extends PureComponent {
     onHandleClick = () => {
@@ -27,11 +61,11 @@ class Quotes extends PureComponent {
         const quotesList = Object.values(quotes);
         return (
             <div className="app-quotes-container">
-                <h1>Welcome to Quotes !</h1>
+                <h1> Welcome to Quotes ! </h1>
                 <div className="button-container">
-                    <button className="button" onClick={this.onHandleClick}>DRAG QUOTES</button>
+                    <button className="button" onClick={this.onHandleClick}> DRAG QUOTES </button>
                 </div>
-                { quotesList ? quotesList.map(quote => <Quote key={quote.ID} deleteQuote={quotesActions.deleteQuote} quote={quote}/>) : null }
+                { quotesList.map(quote => <Quote key={quote.ID} quote={quote}/>) }
             </div>
         )
     };

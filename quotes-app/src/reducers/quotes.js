@@ -18,6 +18,19 @@ export default (state = initial, action) => {
             let newState = copy.filter(i => i.ID !== payload)
             return newState;
         }
+        case actionTypes.EDIT_QUOTE: {
+            const { quote, quoteId } = payload;
+            let copy = Object.values(state);
+            return copy.map(item => {
+                if(item.ID === quoteId) {
+                    return {
+                        ...item,
+                        content: quote
+                    }
+                }
+                return item
+            });
+        }
         default:
             return state;
     }
